@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medição CGE - Manual Interativo</title>
+
+<style>
+body {margin:0;font-family:'Segoe UI',sans-serif;background:#f3f4f6;display:flex}
+
+.sidebar {
+width:260px;background:#111827;color:#fff;height:100vh;
+position:fixed;padding:20px
+}
+
+.sidebar h2 {font-size:18px;margin-bottom:20px}
+
+.sidebar a {
+display:block;padding:10px;border-radius:6px;
+color:#d1d5db;text-decoration:none;margin-bottom:6px
+}
+
+.sidebar a:hover, .sidebar a.active {
+background:#2563eb;color:#fff
+}
+
+.content {
+margin-left:260px;padding:30px;width:100%
+}
+
+.card {
+background:#fff;border-radius:10px;
+padding:25px;margin-bottom:20px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05)
+}
+
+.section-title {
+font-size:20px;color:#2563eb;margin-bottom:15px
+}
+
+.accordion {
+width:100%;text-align:left;
+padding:14px;margin-bottom:6px;
+border:none;border-radius:8px;
+background:#eef2ff;cursor:pointer;
+font-weight:600
+}
+
+.accordion.active {background:#2563eb;color:#fff}
+
+.panel {
+display:none;padding:15px;
+background:#f9fafb;border-radius:8px;margin-bottom:10px
+}
+
+.sap {
+background:#2563eb;color:#fff;
+padding:3px 6px;border-radius:4px;font-size:12px
+}
+
+.alert {
+padding:10px;border-radius:6px;margin-top:10px;font-size:13px
+}
+
+.alert-warning {background:#fef3c7}
+.alert-danger {background:#fee2e2}
+.alert-info {background:#e0f2fe}
+
+.progress {
+height:6px;background:#e5e7eb;border-radius:6px;margin-bottom:10px
+}
+
+.progress-bar {
+height:6px;background:#2563eb;width:0;border-radius:6px
+}
+
+.status {font-size:13px;color:#6b7280;margin-bottom:10px}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>📊 Medição CGE</h2>
+<a href="#">Manual Completo</a>
+</div>
+
+<div class="content">
+
+<div class="card">
+<div class="section-title">Guia Completo de Medição CGE</div>
+
+<div class="status" id="status">Etapa 0 de 5</div>
+<div class="progress"><div class="progress-bar" id="progress"></div></div>
+
+<!-- EQUIPAMENTOS -->
+<button class="accordion">2️⃣ Equipamentos</button>
+<div class="panel">
+
+<p><b>Objetivo:</b> Garantir a correta identificação dos equipamentos com custo.</p>
+
+<p><b>Transações:</b></p>
+<ul>
+<li><span class="sap">ZM0014</span></li>
+<li><span class="sap">IH08</span></li>
+</ul>
+
+<p>
+Levantar todos os equipamentos da obra, incluindo desmobilizados com custos remanescentes.
+</p>
+
+<ul>
+<li>Extrair lista SAP</li>
+<li>Validar duplicidades</li>
+<li>Classificar conforme tabela CGE</li>
+</ul>
+
+<div class="alert alert-warning">
+Famílias podem ter mais de uma classe tarifária.
+</div>
+
+<div class="alert alert-danger">
+Não esquecer equipamentos desmobilizados com custo.
+</div>
+
+</div>
+
+<!-- HORAS -->
+<button class="accordion">3️⃣ Horas Trabalhadas</button>
+<div class="panel">
+
+<p><b>Fonte:</b> <span class="sap">ZE0075</span></p>
+
+<ol>
+<li>Acessar SAPO</li>
+<li>Inserir Ano/Mês/Equipamento</li>
+<li>Filtrar "Serviço"</li>
+<li>Somar horas</li>
+<li>Filtrar Centro de Lucro</li>
+</ol>
+
+<p><b>Fallback:</b> <span class="sap">ZM0013</span></p>
+
+<div class="alert alert-warning">
+Considerar apenas horas produtivas.
+</div>
+
+<div class="alert alert-danger">
+Validar com PCM em caso de inconsistência.
+</div>
+
+</div>
+
+<!-- PERDAS -->
+<button class="accordion">4️⃣ Perdas Mecânicas</button>
+<div class="panel">
+
+<p><b>Transações:</b></p>
+<ul>
+<li><span class="sap">IW28</span></li>
+<li><span class="sap">IW69</span></li>
+</ul>
+
+<ul>
+<li>Extrair notas</li>
+<li>Validar falhas</li>
+<li>Converter horas para turno</li>
+<li>Excluir falha operação e acidente</li>
+</ul>
+
+<div class="alert alert-warning">
+SAP usa horas corridas — ajustar para turno.
+</div>
+
+<div class="alert alert-danger">
+Falhas operacionais não entram.
+</div>
+
+</div>
+
+<!-- CUSTOS -->
+<button class="accordion">5️⃣ Custos (CJI3)</button>
+<div class="panel">
+
+<p><b>Transação:</b> <span class="sap">CJI3</span></p>
+
+<p>
+A CJI3 apresenta o resumo dos custos dos equipamentos, incluindo:
+</p>
+
+<ul>
+<li>Ordens de Serviço</li>
+<li>Combustível e lubrificantes</li>
+<li>Depreciação</li>
+<li>Taxas e licenças</li>
+</ul>
+
+<p><b>Execução:</b></p>
+<ul>
+<li>Inserir código do equipamento</li>
+<li>Inserir período de análise</li>
+<li>Utilizar layout <b>/MED_CGE</b></li>
+</ul>
+
+<p><b>Leitura do relatório:</b></p>
+<ul>
+<li>Buscar os custos no PEP do equipamento</li>
+<li>Em consórcios: SIGLA DA OBRA + PEP</li>
+<li>Custos são consolidados por classe de custo</li>
+<li>Ex: “Conservação e Reparação Equipamentos”</li>
+</ul>
+
+<p><b>Custos de combustível:</b></p>
+<ul>
+<li>Consultar via CJI3 usando ordem de apropriação</li>
+<li>Buscar na transação <span class="sap">IE03</span></li>
+</ul>
+
+<p><b>Preenchimento:</b></p>
+<ul>
+<li>Coluna “Custo Total” = somatório do PEP</li>
+</ul>
+
+<div class="alert alert-warning">
+Custos são consolidados por classe — não analisar isoladamente.
+</div>
+
+<div class="alert alert-danger">
+Utilizar sempre o somatório do PEP do equipamento.
+</div>
+
+<div class="alert alert-info">
+Garantir que todos os custos do período estejam contemplados.
+</div>
+
+</div>
+
+<!-- RESULTADO -->
+<button class="accordion">6️⃣ Resultado Final</button>
+<div class="panel">
+
+<p><b>Regra:</b></p>
+
+<ul>
+<li>Custo > Tarifa → devolve</li>
+<li>Tarifa > Custo → cobra</li>
+</ul>
+
+<p style="color:green;">
+Valor Final = Tarifa − Custo CGE
+</p>
+
+<div class="alert alert-info">
+Define débito ou crédito da obra.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+let acc = document.getElementsByClassName("accordion");
+let progress = document.getElementById("progress");
+let status = document.getElementById("status");
+
+for (let i = 0; i < acc.length; i++) {
+
+acc[i].addEventListener("click", function() {
+
+for (let j = 0; j < acc.length; j++) {
+acc[j].classList.remove("active");
+acc[j].nextElementSibling.style.display = "none";
+}
+
+this.classList.add("active");
+this.nextElementSibling.style.display = "block";
+
+let step = i + 1;
+let total = acc.length;
+
+progress.style.width = (step/total)*100 + "%";
+status.innerText = "Etapa " + step + " de " + total;
+
+});
+}
+</script>
+
+</body>
+</html>
