@@ -1,177 +1,217 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Manual Interativo - Medição CGE</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app-container">
-    <!-- SIDEBAR / MENU LATERAL -->
-    <aside class="sidebar">
-        <h2>📘 Manual CGE</h2>
-        <nav class="sidebar-nav">
-            <a data-section="intro">📌 Introdução</a>
-            <a data-section="cabecalho">🧾 Cabeçalho</a>
-            <a data-section="equipamentos">🚜 Equipamentos</a>
-            <a data-section="horas">⏱ Horas Trabalhadas</a>
-            <a data-section="perdas">🔧 Perdas Mecânicas</a>
-            <a data-section="custos">💰 Custos</a>
-            <a data-section="resultado">📊 Resultado Final</a>
-        </nav>
-    </aside>
+    <div class="app-container">
+        <!-- SIDEBAR / MENU LATERAL -->
+        <aside class="sidebar">
+            <h2>📘 Manual CGE</h2>
+            <nav class="sidebar-nav">
+                <a data-section="intro">📌 Introdução</a>
+                <a data-section="cabecalho">🧾 Cabeçalho</a>
+                <a data-section="equipamentos">🚜 Equipamentos</a>
+                <a data-section="horas">⏱ Horas Trabalhadas</a>
+                <a data-section="perdas">🔧 Perdas Mecânicas</a>
+                <a data-section="custos">💰 Custos</a>
+                <a data-section="resultado">📊 Resultado Final</a>
+            </nav>
+        </aside>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="main-content">
-        <div class="page-title">
-            <span>📊</span> Medição CGE - Manual Interativo
-        </div>
-
-        <!-- INTRODUÇÃO -->
-        <div class="section" id="section-intro">
-            <div class="section-header">📌 Introdução</div>
-            <div class="section-content">
-                <p>A Medição CGE é utilizada para demonstrar a cobrança da frota de equipamentos nas obras.</p>
-                <div class="info">💡 Este manual apresenta o passo a passo completo de preenchimento.</div>
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            <div class="page-title">
+                <span>📊</span> Medição CGE - Manual Interativo
             </div>
-        </div>
 
-        <!-- CABEÇALHO -->
-        <div class="section" id="section-cabecalho">
-            <div class="section-header">🧾 Preenchimento do Cabeçalho</div>
-            <div class="section-content">
-                <ul>
-                    <li>a. Obra/Projeto: <b>WTELB</b></li>
-                    <li>b. Mês/Ano da medição: <b>01/2026</b></li>
-                    <li>c. Gestor de Equipamentos: <b>Marcos Apolinário</b></li>
-                    <li>d. Diretor de Contrato: <b>Otavio Liduário</b></li>
-                </ul>
-                <div class="tip">✔ Utilize este padrão como referência para preenchimento.</div>
-            </div>
-        </div>
-
-        <!-- EQUIPAMENTOS -->
-        <div class="section" id="section-equipamentos">
-            <div class="section-header">🚜 Listagem de Equipamentos</div>
-            <div class="section-content">
-                <p>Após o preenchimento do cabeçalho, deve-se elaborar a listagem completa dos equipamentos vinculados à obra/projeto que apresentaram custos no período de medição.</p>
-                <p>Devem ser considerados:</p>
-                <ul>
-                    <li>Equipamentos atualmente alocados na obra</li>
-                    <li>Equipamentos já desmobilizados, mas que ainda possuem custos remanescentes (ex: revisão de desmobilização)</li>
-                </ul>
-                <p>Essa relação pode ser obtida diretamente no SAP por meio das transações:</p>
-                <ul>
-                    <li><b>ZM0014</b> – Relatório gerencial com foco em custos e apropriações</li>
-                    <li><b>IH08</b> – Listagem técnica de equipamentos</li>
-                </ul>
-                <div class="info">💡 Recomenda-se utilizar a ZM0014 para visão de custos e a IH08 para validação técnica.</div>
-                <p>Após a consolidação, identifique a <b>classe de cada equipamento</b> na Tabela de Tarifas CGE.</p>
-                <div class="warning">⚠ Atenção especial à classificação dos equipamentos! Exemplo: escavadeiras para solo ou rocha possuem classes distintas.</div>
-                <div class="tip">✔ A classificação incorreta pode gerar distorções relevantes no valor final da medição.</div>
-            </div>
-        </div>
-
-        <!-- HORAS TRABALHADAS -->
-        <div class="section" id="section-horas">
-            <div class="section-header">⏱ Horas Trabalhadas</div>
-            <div class="section-content">
-                <p>Apuração das <b>horas trabalhadas</b> dos equipamentos e horas relacionadas às paradas por perdas mecânicas.</p>
-                <p>As horas podem ser obtidas via equipe de <b>Custeio</b> ou no SAP pela transação <b>ZE0075</b>.</p>
-                <button class="toggle-btn" data-target="horasExtra">📋 Ver Passo a Passo no SAP</button>
-                <div id="horasExtra" class="extra-content" style="display: none;">
-                    <ul>
-                        <li><b>a.</b> Acessar a transação <b>ZE0075</b> → ícone “Visualização / Actualização da tabela SAPO”</li>
-                        <li><b>b.</b> Inserir: Ano, Mês, Código do equipamento</li>
-                        <li><b>c.</b> Após carregar, filtrar apenas registros com apontamento <b>“Serviço”</b></li>
-                        <li><b>d.</b> Somar a coluna <b>“Total de Horas Trabalhadas”</b> → lançar na planilha CGE</li>
-                        <li><b>e.</b> Se operou em mais de uma obra, filtrar por <b>“Centro de Lucro”</b></li>
-                        <li><b>f.</b> Divergências: consultar PCM ou usar <b>ZM0013</b> como verificação complementar.</li>
-                    </ul>
+            <!-- INTRODUÇÃO -->
+            <div class="section" id="section-intro">
+                <div class="section-header">📌 Introdução</div>
+                <div class="section-content">
+                    <p>A Medição CGE é utilizada para demonstrar a cobrança da frota de equipamentos nas obras.</p>
+                    <div class="info">💡 Este manual apresenta o passo a passo completo de preenchimento.</div>
                 </div>
-                <div class="tip">✔ Sempre validar a consistência das horas antes de finalizar o preenchimento.</div>
-                <div class="warning">⚠ Divergências entre SAP e operação devem ser tratadas com o PCM antes do fechamento.</div>
             </div>
-        </div>
 
-        <!-- PERDAS MECÂNICAS -->
-        <div class="section" id="section-perdas">
-            <div class="section-header">🔧 Perdas Mecânicas</div>
-            <div class="section-content">
-                <p>As <b>perdas mecânicas</b> representam o tempo em que os equipamentos ficaram indisponíveis por manutenções no período.</p>
-                <p>Informações levantadas pelo PCM com base em Notas e Ordens de Serviço no SAP.</p>
-                <div class="info">💡 Objetivo: apurar apenas paradas reais por falha mecânica elegível.</div>
-                <div class="warning">⚠ NÃO devem ser considerados tempos por <b>mau uso</b> ou <b>acidentes</b>.</div>
-                <button class="toggle-btn" data-target="perdasExtra">🔍 Ver Processo Completo e Detalhado</button>
-                <div id="perdasExtra" class="extra-content" style="display: none;">
+            <!-- CABEÇALHO -->
+            <div class="section" id="section-cabecalho">
+                <div class="section-header">🧾 Preenchimento do Cabeçalho</div>
+                <div class="section-content">
                     <ul>
-                        <li><b>a. Levantamento das Notas (IW28):</b> filtrar pelo período e códigos dos equipamentos.</li>
-                        <li><b>b. Validação das Análises de Falha (IW69):</b> garantir que todas as notas possuam análise concluída.</li>
-                        <li><b>c. Classificação e estratificação:</b> separar falhas mecânicas elegíveis.</li>
-                        <li><b>d. Ajuste do tempo de manutenção:</b> converter horas corridas para horas efetivas de turno da obra (exemplo: 24h corridas → 9h se turno único).</li>
-                        <li><b>e. Desconsiderar falhas por operação/acidente.</b></li>
-                        <li><b>f. Consolidar apenas horas válidas e inserir na planilha CGE.</b></li>
+                        <li>a. Obra/Projeto: <b>WTELB</b></li>
+                        <li>b. Mês/Ano da medição: <b>01/2026</b></li>
+                        <li>c. Gestor de Equipamentos: <b>Marcos Apolinário</b></li>
+                        <li>d. Diretor de Contrato: <b>Otavio Liduário</b></li>
                     </ul>
+                    <div class="tip">✔ Utilize este padrão como referência para preenchimento.</div>
                 </div>
-                <div class="tip">✔ Sempre validar os dados com o PCM e com a operação antes de fechar a medição.</div>
-                <div class="warning">⚠ Erros na classificação ou no ajuste de horas geram distorções nos custos.</div>
             </div>
-        </div>
 
-        <!-- CUSTOS -->
-        <div class="section" id="section-custos">
-            <div class="section-header">💰 Custos</div>
-            <div class="section-content">
-                <p>Apuração dos custos reais dos equipamentos via transação <b>CJI3</b> no SAP, consolidando manutenção, combustível, depreciação etc.</p>
-                <button class="toggle-btn" data-target="custosExtra">📂 Ver Processo Detalhado no SAP</button>
-                <div id="custosExtra" class="extra-content" style="display: none;">
+            <!-- EQUIPAMENTOS -->
+            <div class="section" id="section-equipamentos">
+                <div class="section-header">🚜 Listagem de Equipamentos</div>
+                <div class="section-content">
+                    <p>Após o preenchimento do cabeçalho, deve-se elaborar a listagem completa dos equipamentos
+                        vinculados à obra/projeto que apresentaram custos no período de medição.</p>
+                    <p>Devem ser considerados:</p>
                     <ul>
-                        <li><b>a. Acesso CJI3:</b> insira códigos do equipamento e período (mês/ano). Use layout padrão <b>“/MED_CGE”</b>.</li>
-                        <li><b>b. Leitura:</b> custos organizados por PEP (Estrutura de Projeto). Em obras de consórcio, localizar no 4º nível.</li>
-                        <li><b>c. Consolidação de manutenção:</b> custos agrupados por classe (ex: “Conservação e Reparação de Equipamentos”).</li>
-                        <li><b>d. Custos de combustível:</b> consultar ordem de apropriação via IE03 e depois CJI3 para detalhamento.</li>
-                        <li><b>e. Total consolidado:</b> somar todos os componentes (manutenção + combustível + outros) para cada equipamento.</li>
+                        <li>Equipamentos atualmente alocados na obra</li>
+                        <li>Equipamentos já desmobilizados, mas que ainda possuem custos remanescentes (ex: revisão de
+                            desmobilização)</li>
                     </ul>
+                    <p>Essa relação pode ser obtida diretamente no SAP por meio das transações:</p>
+                    <ul>
+                        <li><b>ZM0014</b> – Relatório gerencial com foco em custos e apropriações</li>
+                        <li><b>IH08</b> – Listagem técnica de equipamentos</li>
+                    </ul>
+                    <div class="info">💡 Recomenda-se utilizar a ZM0014 para visão de custos e a IH08 para validação
+                        técnica.</div>
+                    <p>Após a consolidação, identifique a <b>classe de cada equipamento</b> na Tabela de Tarifas CGE.
+                    </p>
+                    <div class="warning">⚠ Atenção especial à classificação dos equipamentos! Exemplo: escavadeiras para
+                        solo ou rocha possuem classes distintas.</div>
+                    <div class="tip">✔ A classificação incorreta pode gerar distorções relevantes no valor final da
+                        medição.</div>
                 </div>
-                <div class="info">💡 A transação CJI3 é a fonte oficial de custos para a medição CGE.</div>
-                <div class="warning">⚠ Nem todos os custos são tratados da mesma forma — alguns são de responsabilidade direta da obra.</div>
-                <div class="tip">✔ Sempre conferir se o período e os equipamentos estão corretos antes de extrair os dados.</div>
             </div>
-        </div>
 
-        <!-- RESULTADO FINAL -->
-        <div class="section" id="section-resultado">
-            <div class="section-header">📊 Resultado Final</div>
-            <div class="section-content">
-                <p>Após o preenchimento de todas as etapas, a planilha consolida o valor a ser <b>debitado ou creditado da obra</b> através da coluna “Valor Final Medição”.</p>
-                <div class="info">💡 Comparação entre custo real do equipamento e valor da tarifa CGE.</div>
-                <button class="toggle-btn" data-target="resultadoExtra">🧮 Entender a Lógica do Cálculo</button>
-                <div id="resultadoExtra" class="extra-content" style="display: none;">
-                    <p><b>1. Composição do custo total para a obra:</b></p>
-                    <div class="formula">
-                        Custo Total Equipamento para a Obra = Valor da Tarifa + Custos de falha operacional (operador) + Custos de falha por condições da obra + Custos de Adequação + Custo de Combustível
+            <!-- HORAS TRABALHADAS -->
+            <div class="section" id="section-horas">
+                <div class="section-header">⏱ Horas Trabalhadas</div>
+                <div class="section-content">
+                    <p>Apuração das <b>horas trabalhadas</b> dos equipamentos e horas relacionadas às paradas por perdas
+                        mecânicas.</p>
+                    <p>As horas podem ser obtidas via equipe de <b>Custeio</b> ou no SAP pela transação <b>ZE0075</b>.
+                    </p>
+                    <button class="toggle-btn" data-target="horasExtra">📋 Ver Passo a Passo no SAP</button>
+                    <div id="horasExtra" class="extra-content" style="display: none;">
+                        <ul>
+                            <li><b>a.</b> Acessar a transação <b>ZE0075</b> → ícone “Visualização / Actualização da
+                                tabela SAPO”</li>
+                            <li><b>b.</b> Inserir: Ano, Mês, Código do equipamento</li>
+                            <li><b>c.</b> Após carregar, filtrar apenas registros com apontamento <b>“Serviço”</b></li>
+                            <li><b>d.</b> Somar a coluna <b>“Total de Horas Trabalhadas”</b> → lançar na planilha CGE
+                            </li>
+                            <li><b>e.</b> Se operou em mais de uma obra, filtrar por <b>“Centro de Lucro”</b></li>
+                            <li><b>f.</b> Divergências: consultar PCM ou usar <b>ZM0014</b> como verificação
+                                complementar.</li>
+                        </ul>
                     </div>
-                    <p><b>2. Cálculo do valor final da medição:</b></p>
-                    <div class="formula">
-                        Valor Final da Medição = Valor da Tarifa − Custo Total CGE
-                    </div>
-                    <p><b>3. Interpretação:</b></p>
-                    <ul>
-                        <li>Se Custo Total CGE > Tarifa → diferença é <b>creditada</b> à obra (devolução).</li>
-                        <li>Se Custo Total CGE < Tarifa → diferença é <b>debitada</b> da obra (cobrança).</li>
-                    </ul>
-                    <p><b>4. Responsabilidades da obra (sempre):</b> Tarifa mensal CGE, mau uso, condições da obra, adequação, combustível.</p>
-                    <div class="tip">✔ Uma boa gestão operacional reduz custos adicionais, mas não substitui o impacto da tarifa CGE.</div>
+                    <div class="tip">✔ Sempre validar a consistência das horas antes de finalizar o preenchimento.</div>
+                    <div class="warning">⚠ Divergências entre SAP e operação devem ser tratadas com o PCM antes do
+                        fechamento.</div>
                 </div>
-                <div class="tip">✔ Sempre revisar os valores antes do fechamento para garantir que não há distorções.</div>
-                <div class="warning">⚠ Um erro na apuração de custos ou horas impacta diretamente o valor final da medição.</div>
             </div>
-        </div>
-    </main>
-</div>
 
-<script src="script.js"></script>
+            <!-- PERDAS MECÂNICAS -->
+            <div class="section" id="section-perdas">
+                <div class="section-header">🔧 Perdas Mecânicas</div>
+                <div class="section-content">
+                    <p>As <b>perdas mecânicas</b> representam o tempo em que os equipamentos ficaram indisponíveis por
+                        manutenções no período.</p>
+                    <p>Informações levantadas pelo PCM com base em Notas e Ordens de Serviço no SAP.</p>
+
+                    <img src="img/perdas_mecanicas.jpeg" alt="Diagrama de Perdas Mecânicas" class="img-responsiva">
+
+                    <div class="info">💡 Objetivo: apurar apenas paradas reais por falha mecânica elegível.</div>
+                    <div class="warning">⚠ NÃO devem ser considerados tempos por <b>mau uso</b> ou <b>acidentes</b>.
+                    </div>
+                    <button class="toggle-btn" data-target="perdasExtra">🔍 Ver Processo Completo e Detalhado</button>
+                    <div id="perdasExtra" class="extra-content" style="display: none;">
+                        <ul>
+                            <li><b>a. Levantamento das Notas (IW28):</b> filtrar pelo período e códigos dos
+                                equipamentos.</li>
+                            <li><b>b. Validação das Análises de Falha (IW69):</b> garantir que todas as notas possuam
+                                análise concluída.</li>
+                            <li><b>c. Classificação e estratificação:</b> separar falhas mecânicas elegíveis.</li>
+                            <li><b>d. Ajuste do tempo de manutenção:</b> converter horas corridas para horas efetivas de
+                                turno da obra (exemplo: 24h corridas → 9h se turno único).</li>
+                            <li><b>e. Desconsiderar falhas por operação/acidente.</b></li>
+                            <li><b>f. Consolidar apenas horas válidas e inserir na planilha CGE.</b></li>
+                        </ul>
+                    </div>
+                    <div class="tip">✔ Sempre validar os dados com o PCM e com a operação antes de fechar a medição.
+                    </div>
+                    <div class="warning">⚠ Erros na classificação ou no ajuste de horas geram distorções nos custos.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUSTOS -->
+            <div class="section" id="section-custos">
+                <div class="section-header">💰 Custos</div>
+                <div class="section-content">
+                    <p>Apuração dos custos reais dos equipamentos via transação <b>CJI3</b> no SAP, consolidando
+                        manutenção, combustível, depreciação etc.</p>
+                    <button class="toggle-btn" data-target="custosExtra">📂 Ver Processo Detalhado no SAP</button>
+                    <div id="custosExtra" class="extra-content" style="display: none;">
+                        <ul>
+                            <li><b>a. Acesso CJI3:</b> insira códigos do equipamento e período (mês/ano). Use layout
+                                padrão <b>“/MED_CGE”</b>.</li>
+                            <li><b>b. Leitura:</b> custos organizados por PEP (Estrutura de Projeto). Em obras de
+                                consórcio, localizar no 4º nível.</li>
+                            <li><b>c. Consolidação de manutenção:</b> custos agrupados por classe (ex: “Conservação e
+                                Reparação de Equipamentos”).</li>
+                            <li><b>d. Custos de combustível:</b> consultar ordem de apropriação via IE03 e depois CJI3
+                                para detalhamento.</li>
+                            <li><b>e. Total consolidado:</b> somar todos os componentes (manutenção + combustível +
+                                outros) para cada equipamento.</li>
+                        </ul>
+                    </div>
+                    <div class="info">💡 A transação CJI3 é a fonte oficial de custos para a medição CGE.</div>
+                    <div class="warning">⚠ Nem todos os custos são tratados da mesma forma — alguns são de
+                        responsabilidade direta da obra.</div>
+                    <div class="tip">✔ Sempre conferir se o período e os equipamentos estão corretos antes de extrair os
+                        dados.</div>
+                </div>
+            </div>
+
+            <!-- RESULTADO FINAL -->
+            <div class="section" id="section-resultado">
+                <div class="section-header">📊 Resultado Final</div>
+                <div class="section-content">
+                    <p>Após o preenchimento de todas as etapas, a planilha consolida o valor a ser <b>debitado ou
+                            creditado da obra</b> através da coluna “Valor Final Medição”.</p>
+                    <div class="info">💡 Comparação entre custo real do equipamento e valor da tarifa CGE.</div>
+                    <button class="toggle-btn" data-target="resultadoExtra">🧮 Entender a Lógica do Cálculo</button>
+                    <div id="resultadoExtra" class="extra-content" style="display: none;">
+                        <p><b>1. Composição do custo total para a obra:</b></p>
+                        <div class="formula">
+                            Custo Total Equipamento para a Obra = Valor da Tarifa + Custos de falha operacional
+                            (operador) + Custos de falha por condições da obra + Custos de Adequação + Custo de
+                            Combustível
+                        </div>
+                        <p><b>2. Cálculo do valor final da medição:</b></p>
+                        <div class="formula">
+                            Valor Final da Medição = Valor da Tarifa − Custo Total CGE
+                        </div>
+                        <p><b>3. Interpretação:</b></p>
+                        <ul>
+                            <li>Se Custo Total CGE > Tarifa → diferença é <b>creditada</b> à obra (devolução).</li>
+                            <li>Se Custo Total CGE < Tarifa → diferença é <b>debitada</b> da obra (cobrança).</li>
+                        </ul>
+                        <p><b>4. Responsabilidades da obra (sempre):</b> Tarifa mensal CGE, mau uso, condições da obra,
+                            adequação, combustível.</p>
+                        <div class="tip">✔ Uma boa gestão operacional reduz custos adicionais, mas não substitui o
+                            impacto da tarifa CGE.</div>
+                    </div>
+                    <div class="tip">✔ Sempre revisar os valores antes do fechamento para garantir que não há
+                        distorções.</div>
+                    <div class="warning">⚠ Um erro na apuração de custos ou horas impacta diretamente o valor final da
+                        medição.</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
