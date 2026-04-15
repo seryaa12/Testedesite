@@ -1,0 +1,342 @@
+/* ========== RESET & GLOBAL ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #eef2f7;
+    color: #1e2a3e;
+    line-height: 1.5;
+}
+
+/* ========== LAYOUT FLEX RESPONSIVO ========== */
+.app-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+/* SIDEBAR (MENU LATERAL) */
+.sidebar {
+    width: 260px;
+    background: #0f212e;
+    color: #e9edf2;
+    padding: 1.8rem 1.2rem;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-left: 4px solid #2ecc71;
+    padding-left: 0.75rem;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.sidebar-nav a {
+    color: #cfdee9;
+    text-decoration: none;
+    padding: 0.6rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: block;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.sidebar-nav a:hover {
+    background: #2c4b62;
+    color: white;
+    padding-left: 1rem;
+}
+
+.sidebar-nav a.active {
+    background: #1f6392;
+    color: white;
+    border-left: 3px solid #2ecc71;
+}
+
+/* CONTEÚDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    padding: 2rem 2rem 3rem 2rem;
+    max-width: calc(100% - 260px);
+    background: #f8fafc;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    color: #0b2b38;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* CARDS/SECTIONS */
+.section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.8rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.section-header {
+    padding: 1.2rem 1.5rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    background: #1f6392;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s;
+    user-select: none;
+}
+
+.section-header:hover {
+    background: #0e4b70;
+}
+
+.section-header::after {
+    content: "▼";
+    font-size: 0.85rem;
+    transition: transform 0.2s;
+}
+
+.section.open .section-header::after {
+    transform: rotate(180deg);
+}
+
+.section-content {
+    display: none;
+    padding: 1.5rem;
+    background: white;
+    border-top: 1px solid #e9edf2;
+}
+
+.section.open .section-content {
+    display: block;
+}
+
+/* CAIXAS DE DESTAQUE */
+.highlight,
+.tip,
+.warning,
+.info {
+    padding: 0.9rem 1.2rem;
+    border-radius: 16px;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+}
+
+.tip {
+    background: #e0f2e9;
+    border-left: 6px solid #1abc9c;
+}
+
+.warning {
+    background: #fee9e6;
+    border-left: 6px solid #e74c3c;
+}
+
+.info {
+    background: #e6f0fa;
+    border-left: 6px solid #3498db;
+}
+
+/* BOTÕES */
+button,
+.toggle-btn {
+    background: #2c7da0;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 0.5rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+button:hover,
+.toggle-btn:hover {
+    background: #1f5e7e;
+    transform: scale(0.98);
+}
+
+/* CONTEÚDO EXTRA (expandido por botão) */
+.extra-content {
+    background: #f9fbfd;
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 0;
+    border: 1px solid #e2e8f0;
+}
+
+/* FÓRMULAS */
+.formula {
+    background: #1e2f3c;
+    color: #f0f6fa;
+    padding: 1rem 1.2rem;
+    border-radius: 18px;
+    font-family: 'Courier New', 'Fira Code', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+/* LISTAS */
+ul,
+ol {
+    padding-left: 1.5rem;
+    margin: 0.8rem 0;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+b,
+strong {
+    font-weight: 700;
+}
+
+/* SCROLL SUAVE */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 0;
+        border-left: none;
+        padding-left: 0;
+        font-size: 1.3rem;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .sidebar-nav a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .main-content {
+        max-width: 100%;
+        padding: 1.2rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        padding: 0.8rem 1rem;
+    }
+
+    .sidebar h2 {
+        font-size: 1.1rem;
+    }
+
+    .sidebar-nav a {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .section-header {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .section-content {
+        padding: 1rem;
+    }
+
+    .formula {
+        font-size: 0.75rem;
+        padding: 0.8rem;
+    }
+
+    .tip,
+    .warning,
+    .info {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-nav {
+        gap: 0.3rem;
+    }
+
+    .sidebar-nav a {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    button,
+    .toggle-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
